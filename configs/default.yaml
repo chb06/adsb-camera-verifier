@@ -1,0 +1,59 @@
+# Default configuration (Mac-friendly baseline)
+
+camera:
+  backend: opencv      # opencv for Mac/dev, gstreamer for Jetson/Linux UVC
+  source: 0            # webcam index like 0, or a video file path
+  mode: 720p30         # one of: 4k15, 1080p60, 1080p30, 720p90, 720p60, 720p30
+  display: false
+
+audio:
+  enabled: false
+  sample_rate_hz: 16000
+  blocksize: 2048
+  device: null
+
+adsb:
+  enabled: true
+  host: 172.16.30.215
+  port: 30003
+
+site:
+  lat0_deg: 0.0
+  lon0_deg: 0.0
+  alt0_m: 0.0
+
+calibration:
+  use_fov_guess: true
+  hfov_deg: 41.0
+  vfov_deg: 31.0
+  fx: 0.0
+  fy: 0.0
+  cx: 0.0
+  cy: 0.0
+  dist: [0, 0, 0, 0, 0]
+  yaw_deg: 0.0
+  pitch_deg: 0.0
+  roll_deg: 0.0
+
+corridor:
+  enabled: false
+
+roi:
+  k_sigma: 3.0
+  default_sigma_m: 80.0
+  min_hw_px: 160
+  min_hh_px: 160
+  obj_margin_px: 48
+
+fusion:
+  max_verify_time_s: 60.0
+  coincidence_window_s: 3.0
+  vision_persist_frames: 4
+  audio_energy_thresh: 0.25
+  require_audio_for_verify: false
+
+yolo:
+  backend: none        # none | ultralytics | tensorrt
+  model_path: null
+  imgsz: 640
+  conf: 0.25

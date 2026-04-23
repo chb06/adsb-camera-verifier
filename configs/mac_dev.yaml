@@ -1,0 +1,39 @@
+# Override for Mac-first development using the Arducam USB camera via FFmpeg AVFoundation.
+# Usage:
+#   python -m app.list_cameras
+#   python -m app.smoke_camera --backend ffmpeg_avfoundation --source "Arducam B0498 (USB3 8.3MP)" --mode 720p15 --display --seconds 60
+#   python -m app.run_realtime --config configs/default.yaml --override configs/mac_dev.yaml --display --seconds 30
+
+camera:
+  backend: ffmpeg_avfoundation
+  source: "Arducam B0498 (USB3 8.3MP)"
+  mode: 720p15
+  display: true
+
+audio:
+  enabled: false
+
+adsb:
+  enabled: true
+  host: adsbexchange.local
+  port: 30003
+
+fusion:
+  require_audio_for_verify: false
+
+yolo:
+  backend: none
+
+logging:
+  enabled: true
+  base_dir: runs
+  save_video: true
+  save_roi_jpeg: true
+  summary_interval_s: 5.0
+  overlay_max_items: 4
+  stale_track_s: 15.0
+
+site:
+  lat_deg: 37.33208
+  lon_deg: -121.88513
+  alt_m: 27.0

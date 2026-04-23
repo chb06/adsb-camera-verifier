@@ -1,0 +1,30 @@
+# Copy this file to something like configs/site_local.yaml and fill in your real values.
+# Then run with both overrides:
+#   python -m app.run_realtime --config configs/default.yaml --override configs/mac_dev.yaml
+# or merge this into your own override file.
+#
+# The important part is that site.lat0_deg / lon0_deg / alt0_m must match the camera location.
+# Yaw/pitch/roll can start rough and be refined later.
+
+site:
+  lat0_deg: 0.0
+  lon0_deg: 0.0
+  alt0_m: 0.0
+
+calibration:
+  # Set to false after you have checkerboard calibration results.
+  use_fov_guess: true
+  hfov_deg: 41.0
+  vfov_deg: 31.0
+
+  # Paste real intrinsics here after running app.calibrate_intrinsics
+  fx: 0.0
+  fy: 0.0
+  cx: 0.0
+  cy: 0.0
+  dist: [0, 0, 0, 0, 0]
+
+  # Rough physical pointing estimate to start with.
+  yaw_deg: 0.0
+  pitch_deg: 0.0
+  roll_deg: 0.0
