@@ -1,0 +1,51 @@
+# Override for Mac-first development using the Arducam USB camera.
+# Usage:
+#   python3 -m app.list_cameras
+#   python3 -m app.smoke_camera --source 0 --mode 720p15 --display --seconds 60
+#   python3 -m app.run_realtime --config configs/default.yaml --override configs/mac_dev.yaml --display --seconds 30
+
+camera:
+  backend: opencv
+  source: 0
+  mode: 720p15
+  display: true
+
+audio:
+  enabled: false
+
+adsb:
+  enabled: true
+  host: adsbexchange.local
+  port: 30003
+  lead_s: 8.0
+
+roi:
+  width_scale: 0.9
+  height_scale: 0.5
+  anchor_y: top
+
+fusion:
+  require_audio_for_verify: false
+
+yolo:
+  backend: ultralytics
+  model_path: yolov8s.pt
+
+logging:
+  enabled: true
+  base_dir: runs
+  save_video: true
+  save_roi_jpeg: true
+  summary_interval_s: 5.0
+  overlay_max_items: 4
+  stale_track_s: 15.0
+
+site:
+  lat0_deg: 37.33208
+  lon0_deg: -121.88513
+  alt0_m: 27.0
+
+calibration:
+  yaw_deg: 144.0
+  pitch_deg: 15.0
+  roll_deg: 0.0

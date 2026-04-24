@@ -1,0 +1,11 @@
+[project]
+name = "adsb-cam-audio-verifier"
+version = "0.1.0"
+description = "Passive ADS-B + camera + audio verification scaffold"
+requires-python = ">=3.10"
+
+[tool.black]
+line-length = 100
+
+[tool.ruff]
+line-length = 100

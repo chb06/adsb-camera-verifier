@@ -1,0 +1,9 @@
+# Ultralytics YOLO dataset definition
+# Fill in the absolute path or a path relative to where you run training.
+
+path: /ABS/PATH/TO/dataset
+train: images/train
+val: images/val
+
+names:
+  0: aircraft

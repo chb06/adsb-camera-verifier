@@ -1,0 +1,14 @@
+# Python deps installed via pip
+numpy>=1.24
+scipy>=1.10
+pymap3d>=3.1
+PyYAML>=6.0
+rich>=13.0
+opencv-python>=4.8
+
+# Optional, only needed if you enable audio capture:
+sounddevice>=0.4
+
+# Optional, for quick detector experiments on Mac:
+# ultralytics>=8.0
+# torch/torchvision installed separately depending on platform
