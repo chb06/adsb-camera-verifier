@@ -12,7 +12,7 @@ It keeps the parts that are already working:
 - **Audio remains disabled by default**
 - **Jetson stays a later deployment target**
 
-The priority in this update is not fancy architecture. The priority is a **stable path to collecting usable synchronized sessions**, replaying them, and starting offline YOLO experiments safely.
+
 
 ---
 
