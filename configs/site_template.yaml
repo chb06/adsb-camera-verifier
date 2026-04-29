@@ -25,6 +25,10 @@ calibration:
   dist: [0, 0, 0, 0, 0]
 
   # Rough physical pointing estimate to start with.
+  # ENU/world convention from geo/projection.py:
+  # - yaw_deg: 0 = north, +90 = east
+  # - pitch_deg: positive tilts camera upward, negative downward
+  # - roll_deg: image rotation around the viewing axis; tune this last
   yaw_deg: 0.0
   pitch_deg: 0.0
   roll_deg: 0.0

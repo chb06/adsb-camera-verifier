@@ -31,6 +31,17 @@ calibration:
   cx: 0.0
   cy: 0.0
   dist: [0, 0, 0, 0, 0]
+  # Extrinsics / pointing, in the ENU world frame used by geo/projection.py.
+  # Camera frame convention is +X right, +Y down, +Z forward.
+  # yaw_deg:
+  #   0   = camera looks toward geographic north
+  #   +90 = camera looks toward east
+  # pitch_deg:
+  #   positive tilts the camera upward above the horizon
+  #   negative tilts the camera downward
+  # roll_deg:
+  #   rotates the image around the viewing axis
+  #   use this last, after yaw/pitch are close
   yaw_deg: 0.0
   pitch_deg: 0.0
   roll_deg: 0.0
@@ -45,6 +56,15 @@ roi:
   min_hh_px: 160
   obj_margin_px: 48
 
+projection:
+  max_track_age_s_draw: 1.0
+  roi_scale: 0.6
+  roi_padding_px: 24
+  roi_max_fraction_of_frame: 0.35
+
+vision:
+  max_draw_persist_frames: 3
+
 fusion:
   max_verify_time_s: 60.0
   coincidence_window_s: 3.0
@@ -57,3 +77,15 @@ yolo:
   model_path: null
   imgsz: 640
   conf: 0.25
+
+logging:
+  enabled: false
+  base_dir: runs
+  save_video: true
+  save_roi_jpeg: true
+  jpeg_quality: 90
+  summary_interval_s: 5.0
+  overlay_max_items: 4
+  stale_track_s: 15.0
+  record_only_when_tracks_present: true
+  record_stop_holdoff_s: 5.0

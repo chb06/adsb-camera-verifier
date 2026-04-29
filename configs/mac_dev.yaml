@@ -18,11 +18,32 @@ adsb:
   host: adsbexchange.local
   port: 30003
 
+calibration:
+  # Tune these first for ADS-B ROI alignment on Mac dev.
+  # 0 yaw means north, +90 means east.
+  # Positive pitch tilts the camera upward; negative pitch tilts it downward.
+  # Roll rotates the image around the viewing axis and is usually tuned last.
+  yaw_deg: -150.0
+  pitch_deg: 10.0
+  roll_deg: 0.0
+
+projection:
+  max_track_age_s_draw: 1.0
+  roi_scale: 0.8
+  roi_padding_px: 40
+  roi_max_fraction_of_frame: 0.45
+
+vision:
+  max_draw_persist_frames: 3
+
 fusion:
   require_audio_for_verify: false
 
 yolo:
-  backend: none
+  backend: ultralytics
+  model_path: yolov8s.pt
+  imgsz: 640
+  conf: 0.25
 
 logging:
   enabled: true
@@ -32,8 +53,10 @@ logging:
   summary_interval_s: 5.0
   overlay_max_items: 4
   stale_track_s: 15.0
+  record_only_when_tracks_present: true
+  record_stop_holdoff_s: 5.0
 
 site:
-  lat_deg: 37.33208
-  lon_deg: -121.88513
-  alt_m: 27.0
+  lat0_deg: 37.33208
+  lon0_deg: -121.88513
+  alt0_m: 27.0

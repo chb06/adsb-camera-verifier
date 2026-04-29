@@ -79,6 +79,7 @@ class ReplayRun:
         self.video_path = run_dir / 'video.mp4'
         self.detections_dir = run_dir / 'detections'
 
+        saved_frame_rows = [r for r in self.frame_index_raw if bool(r.get('saved_in_video', True))]
         self.frames: List[FrameRecord] = [
             FrameRecord(
                 frame_id=int(r.get('frame_id', idx + 1)),
@@ -86,7 +87,7 @@ class ReplayRun:
                 t_frame=float(r.get('t_frame', 0.0)),
                 t_rel_s=float(r.get('t_rel_s', 0.0)),
             )
-            for idx, r in enumerate(self.frame_index_raw)
+            for idx, r in enumerate(saved_frame_rows)
         ]
         self.frames.sort(key=lambda r: r.video_frame_idx)
 

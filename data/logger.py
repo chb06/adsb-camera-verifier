@@ -54,6 +54,7 @@ class RunLogger:
         self.video_path = cfg.out_dir / 'video.mp4'
 
         self.video_frame_idx = 0
+        self.video_frames_written = 0
         self.frames_logged = 0
         self.adsb_logged = 0
         self.track_frames_logged = 0
@@ -98,27 +99,29 @@ class RunLogger:
             (int(w), int(h)),
         )
 
-    def log_frame(self, frame_bgr: 'object', *, t_frame: float, frame_id: int) -> int:
+    def log_frame(self, frame_bgr: 'object', *, t_frame: float, frame_id: int, save_in_video: bool = True) -> int:
         if self.first_frame_t is None:
             self.first_frame_t = float(t_frame)
         self.last_frame_t = float(t_frame)
 
-        video_frame_idx = int(self.video_frame_idx)
+        saved_in_video = bool(self.cfg.save_video and save_in_video)
+        video_frame_idx = int(self.video_frame_idx) if saved_in_video else -1
         rec = {
             'frame_id': int(frame_id),
             'video_frame_idx': video_frame_idx,
             't_frame': float(t_frame),
             't_rel_s': float(t_frame - self.first_frame_t),
-            'saved_in_video': bool(self.cfg.save_video),
+            'saved_in_video': saved_in_video,
         }
         self.f_frames.write(json.dumps(rec) + '\n')
 
-        if self.cfg.save_video:
+        if saved_in_video:
             self._ensure_video_writer(frame_bgr)
             if self.video_writer is not None:
                 self.video_writer.write(frame_bgr)
+                self.video_frame_idx += 1
+                self.video_frames_written += 1
 
-        self.video_frame_idx += 1
         self.frames_logged += 1
         return video_frame_idx
 
@@ -174,8 +177,10 @@ class RunLogger:
         self.decisions_logged += 1
 
     def finalize(self, extra_summary: Optional[Dict[str, Any]] = None):
+        video_path = 'video.mp4' if self.video_frames_written > 0 and self.video_path.exists() else None
         summary = {
-            'video_path': 'video.mp4' if self.cfg.save_video else None,
+            'video_path': video_path,
+            'video_frames_written': int(self.video_frames_written),
             'frames_logged': int(self.frames_logged),
             'adsb_messages_logged': int(self.adsb_logged),
             'track_frames_logged': int(self.track_frames_logged),

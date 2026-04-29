@@ -10,5 +10,5 @@ opencv-python>=4.8
 sounddevice>=0.4
 
 # Optional, for quick detector experiments on Mac:
-# ultralytics>=8.0
+ultralytics>=8.0
 # torch/torchvision installed separately depending on platform
